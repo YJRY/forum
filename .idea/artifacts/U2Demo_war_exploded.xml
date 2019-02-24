@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="U2Demo:war exploded">
+    <output-path>$PROJECT_DIR$/out</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="U2Demo" />
+          <element id="dir-copy" path="$PROJECT_DIR$/resources" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="U2Demo/web/Web" />
+      <element id="javaee-facet-resources" facet="U2Demo/web/Web2" />
+    </root>
+  </artifact>
+</component>

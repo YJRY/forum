@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yjry.dao.PostDao">
+
+    <resultMap id="post1" type="com.yjry.entity.Post">
+        <id property="id" column="p_id"/>
+        <result property="user" column="p_user"/>
+        <result property="time" column="p_time"/>
+        <result property="title" column="p_title"/>
+        <result property="content" column="p_content"/>
+        <result property="type" column="p_type"/>
+        <result property="tunum" column="p_tunum"/>
+    </resultMap>
+
+    <select id="getPostById" resultMap="post1">
+        select * from posts where p_id = #{id}
+    </select>
+
+    <select id="getLatestData" resultMap="post1">
+        select * from posts order by p_time desc limit 4
+    </select>
+
+    <select id="getHotData" resultMap="post1">
+        select * from posts order by p_tunum desc limit 4
+    </select>
+
+    <select id="getDataByType" resultMap="post1">
+        select * from posts where p_type = #{type}
+    </select>
+
+    <select id="getDataByUser" resultMap="post1">
+        select * from posts where p_user = #{username}
+    </select>
+
+    <select id="getDataByPageAndType" resultMap="post1">
+        select * from posts where p_type = #{type} limit #{page},#{count}
+    </select>
+
+    <select id="getRowCount" resultType="int">
+        select count(*) from posts
+    </select>
+
+    <select id="getRowCountByType" resultType="int">
+        select count(*) from posts where p_type = #{type}
+    </select>
+
+    <insert id="addPost">
+        insert into posts(p_user, p_time, p_title, p_content, p_type) values(#{username}, NOW(), #{title}, #{content}, #{type})
+    </insert>
+</mapper>

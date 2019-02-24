@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                          http://www.springframework.org/schema/context
+                          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                          http://www.springframework.org/schema/mvc
+                          http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <!--使fastjson支持返回html文本类型-->
+                        <value>text/html;charset=UTF-8</value>
+                        <!--使fastjson支持返回json格式-->
+                        <value>application/json;charset=UTF-8</value>
+                        <!--使fastjson支持返回xml格式-->
+                        <value>application/xml;charset=UTF-8</value>
+                    </list>
+                </property>
+                <property name="features">
+                    <array>
+                        <!--即使map中key对应的值为null，依旧将该键值对转换成json-->
+                        <value>WriteMapNullValue</value>
+                        <!--使json转换时间格式时，默认按照yyyy-MM-dd HH:mm:ss的格式进行转化-->
+                        <value>WriteDateUseDateFormat</value>
+                    </array>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!--实际项目中更建议使用方法-->
+    <!--<mvc:resources mapping="/static/**" location="/static/"/>-->
+    <!--配置视图的前缀与后缀-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="suffix" value=".jsp"/>
+        <property name="prefix" value="/WEB-INF/"/>
+    </bean>
+
+
+</beans>

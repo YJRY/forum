@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yjry.dao.SignDao">
+
+    <resultMap id="sign1" type="com.yjry.entity.Sign">
+        <id property="id" column="s_id"/>
+        <result property="user" column="s_user"/>
+        <result property="time" column="s_time"/>
+    </resultMap>
+
+    <select id="getSign" resultMap="sign1">
+      select * from signs where DateDiff(s_time, NOW()) = 0 and s_user = #{username}
+    </select>
+    <insert id="addSign">
+      insert into signs(s_user, s_time) values(#{username} , NOW())
+    </insert>
+</mapper>

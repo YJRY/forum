@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yjry.dao.UserDao">
+
+    <resultMap id="user1" type="com.yjry.entity.User">
+        <id property="id" column="u_id"/>
+        <result property="name" column="u_name"/>
+        <result property="pwd" column="u_pwd"/>
+        <result property="sex" column="u_sex"/>
+        <result property="email" column="u_email"/>
+        <result property="level" column="u_level"/>
+        <result property="exp" column="u_exp"/>
+        <result property="image" column="u_image"/>
+        <result property="rtime" column="u_rtime"/>
+    </resultMap>
+
+    <select id="getUserById" resultMap="user1">
+        select * from users where u_id = #{id}
+    </select>
+
+    <select id="getUserByName" resultMap="user1">
+        select * from users where u_name = #{name}
+    </select>
+
+    <select id="getUserByNameAndPwd" parameterType="User" resultMap="user1">
+        select * from users where u_name = #{name} and u_pwd = #{pwd}
+    </select>
+
+    <select id="getUserByPost" parameterType="Post" resultMap="user1">
+        select * from users where u_name = #{user}
+    </select>
+
+    <insert id="addUser">
+        insert into users(u_name, u_pwd, u_rtime) values(#{name}, #{pwd}, NOW())
+    </insert>
+
+    <update id="changeUser">
+        update users set u_email = #{email} , u_sex = #{sex}  where u_id = #{id}
+    </update>
+
+    <update id="changePwd">
+        update users set u_pwd = #{pwd} where u_id = #{id}
+    </update>
+
+    <update id="addImagePath">
+        update users set u_image = #{path} where u_id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yjry.dao.ExpDao">
+
+    <resultMap id="exp1" type="com.yjry.entity.Exp">
+        <id property="id" column="e_id"/>
+        <result property="level" column="e_level"/>
+        <result property="exp" column="e_exp"/>
+        <result property="name" column="e_name"/>
+    </resultMap>
+
+    <update id="addExp">
+      update users set u_exp = u_exp + #{num}  where u_id = #{id}
+    </update>
+
+    <select id="getDataByExp" resultMap="exp1">
+        select * from exps where e_exp &lt;= #{exp} order by e_exp desc
+    </select>
+</mapper>

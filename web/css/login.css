@@ -1,0 +1,9 @@
+form .layui-form-item{
+     line-height: 38px;
+ }
+#change{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    left: 110px;
+}
